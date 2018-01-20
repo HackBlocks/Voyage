@@ -15,6 +15,7 @@ class App extends React.Component {
       restaurants: [],
       hotels: [],
       events: [],
+      board: [],
       isSignedIn: false,
       location: ''
     };
@@ -22,8 +23,50 @@ class App extends React.Component {
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
+  deleteLike(event) {
+    axios.delete('/', {
+      params: {event: event}
+    })
+      .then(response => {
+        console.log('Deleted');
+      })
+      .catch(error => {
+        console.log('Could not delete');
+      });
+  }
+
+  getBoard() {
+    axios.get('/')
+      .then(response => {
+        this.setState({board: response.data});
+      })
+      .catch(error => {
+        console.log('could not retreieve board');
+      });
+  }
+
+  // postLike(event) {
+  //   axios.
+  // }
+
+  go(loc) {
+    this.setState({
+      location: loc
+    });
+
+    axios.get('/', {
+      params: {location: loc}
+    })
+      .then(response => {
+        console.log('Data from server', response);
+        this.setState({
+
+        });
+      });
+  }
   componentDidMount() {
     this.signIn();
+    this.getBoard();
   }
 
   signIn() {
@@ -31,12 +74,12 @@ class App extends React.Component {
     $.ajax({
       url: '/checkSession',
       success: function(isSignedIn) {
-        that.setState({ isSignedIn: isSignedIn })
+        that.setState({ isSignedIn: isSignedIn });
       },
       error: function() {
-        console.log('check access token error')
+        console.log('check access token error');
       }
-    })
+    });
   }
 
   handleLogOut() {
@@ -48,71 +91,14 @@ class App extends React.Component {
     $.ajax({
       url: '/logOut',
       success: function(isSignedIn) {
-        that.setState({ isSignedIn: isSignedIn })
+        that.setState({ isSignedIn: isSignedIn });
       },
       error: function() {
-        console.log('logout error')
+        console.log('logout error');
       }
-    })
-  }
-
-  go(loc) {
-    this.setState({
-      location: loc
     });
-
-    axios.post('/eat', {
-      location: loc
-    })
-      .then(response => {
-        console.log('eat data from server', response);
-        this.setState({
-          restaurants: response.data
-        });
-      })
-      .catch(error => {
-        console.log('error..!!', error);
-      });
-
-    axios.post('/sleep', {
-      location: loc
-    })
-      .then(response => {
-        console.log('sleep data from server', response);
-        this.setState({
-          hotels: response.data
-        });
-      })
-      .catch(error => {
-        console.log('error..!!', error);
-      });
-
-    axios.post('/explore', {
-      location: loc
-    })
-      .then(response => {
-        console.log('explore data from server', response);
-        this.setState({
-          events: response.data
-        });
-      })
-      .catch(error => {
-        console.log('error..!!', error);
-      });
-
-    axios.post('/party', {
-      location: loc
-    })
-      .then(response => {
-        console.log('party data from server', response);
-        this.setState({
-          events: this.state.events.concat(response.data)
-        });
-      })
-      .catch(error => {
-        console.log('error..!!', error);
-      });
   }
+
 
   render() {
     return (
