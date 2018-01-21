@@ -35,6 +35,7 @@ class Login extends React.Component {
             </a>
           </div>
         );
+
     }
     return status;
   }
@@ -45,7 +46,9 @@ class Login extends React.Component {
         <div className="ui tabular menu">
           <div className="right menu">
             <div className="item">
-              { this.displayStatus() }
+              <div className="ui teal button">
+                { this.displayStatus() }
+              </div>
             </div>
           </div>
         </div>

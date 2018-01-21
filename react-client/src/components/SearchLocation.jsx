@@ -34,10 +34,9 @@ class SearchLocation extends React.Component {
 
   render() {
     return (
-      <div className="ui container">
-        <div className="headerDiv">
+      <div id="headerDiv" className="ui container">
           <span className="searchDiv">
-            <img src="http://www.clker.com/cliparts/O/Z/l/7/u/h/black-white-outline-world-map-no-background-hi.png"/>
+            <img src="Voyager.png"/>
             <h2 className="description">Plan your next getaway!</h2>
             <div className="ui fluid input">
               <input type="text" value={this.state.value} placeholder="I want to go to..."
@@ -47,7 +46,6 @@ class SearchLocation extends React.Component {
               <div className="ui teal button" onClick={ this.handleClick }>GO</div>
             </div>
           </span>
-        </div>
       </div>
     );
   }
