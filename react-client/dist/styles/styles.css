@@ -1,7 +1,7 @@
-.ui.container{
+#headerDiv.ui.container{
   height: 500px;
   width: 100%;
-  background-image: url("https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=2100&q=80");
+  background-image: url("../img/background.png");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -10,10 +10,13 @@
 .ui.teal.basic.button {
   text-align: right;
 }
-.headerDiv:before {
+.headerDiv{
 
 }
 
+.searchDiv img{
+  max-width: 60%
+}
 .searchDiv {
   min-width: 40%;
   position: absolute;
@@ -28,6 +31,7 @@
 .headerDiv h2 {
   color: white;
 }
-.nameHeader {
 
+.logIn {
+  display: inline;
 }
